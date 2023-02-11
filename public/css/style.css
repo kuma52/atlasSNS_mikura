@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+html {}
+
+body {}
+
+/* header */
+header {
+    background: #186AC9;
+}
+
+#head,
+#menu {
+    display: flex;
+}
+
+/* main content */
+#row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#container {
+    flex: 0 0 80%;
+}
+
+#side-bar {
+    flex: 0 0 19%;
+    border-left: 1px solid #727272;
+}
