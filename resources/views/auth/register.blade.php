@@ -2,8 +2,25 @@
 
 @section('content')
 
-{!! Form::open() !!}
+<!-- エラーメッセージの表示 -->
+@if ($errors->any())
+  <div class="">
+    <ul>
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  <br><br><!-- 後で<br>の代わりにCSSでmarginかpaddingつける -->
+@endif
+<!-- $errors->any()は、変数$errorsの中にエラーメッセージがあるかどうかチェックを行うメソッドです。エラーメッセージがあればtrue、なければfalseを戻します。 -->
+<!-- $errors->all()にはバリデーションの中のチェックで発生したエラー情報が配列として保持しています。foreachを使用することで1つ1つのメッセージを取り出すことができます。 -->
 
+
+
+<!-- フォーム -->
+{!! Form::open() !!}
+@csrf
 <h2>新規ユーザー登録</h2>
 <div class="inner-element">
 {{ Form::label('ユーザー名') }}<br>
@@ -15,15 +32,15 @@
 </div>
 <div class="inner-element">
 {{ Form::label('パスワード') }}<br>
-{{ Form::text('password',null,['class' => 'input']) }}
+{{ Form::password('password',['class' => 'input']) }}
 </div>
 <div class="inner-element">
 {{ Form::label('パスワード確認') }}<br>
-{{ Form::text('password-confirm',null,['class' => 'input']) }}
+{{ Form::password('password_confirmation',['class' => 'input']) }}
 </div>
 <div class="btn-wrapper">{{ Form::submit('登録', ['class' => 'btn']) }}</div>
 
-<p class="back"><a href="/login">ログイン画面へ戻る</a></p>
+<p class="back"><a href="login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 

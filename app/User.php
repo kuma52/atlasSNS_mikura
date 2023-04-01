@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password', 'bio', 'images',
     ];
 
     /**
@@ -26,4 +26,58 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //一人のuserが複数の投稿を持つ、一対多の関係
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    //多対多のリレーション
+    //フォローしているユーザーを取得
+    // public function following()
+    // {
+    //     return $this -> belongsToMany('App\User', 'follows','following_id','followed_id')->withTimestamps();
+    // }
+
+    // //フォローされているユーザーを取得
+    // public function followed()
+    // {
+    //     return $this -> belongsToMany('App\User', 'follows', 'following_id', 'followed_id')->withTimestamps();
+    // }
+
+
+//belongsToMany('①最終的な接続先モデル名','②中間テーブル名','③接続先モデルIDを示す中間テーブル内のカラム名','④接続元モデルIDのカラム名','⑤接続先モデルIDのカラム名','⑥最終的な接続先モデルIDのカラム名')
+
+//●リレーション元のusersテーブルのidと、followee_idが紐づいている
+//●リレーション先のusersテーブルとfollower_idが紐づいている
+//→このような関係性の場合は第三、第四引数は省略せずに中間テーブルのカラム名の記述をします。
+//※中間テーブルカラム名【リレーション元・先のテーブル名の単数形＿id】という規則性に当てはまらない
+
+    //引数で受け取ったログインユーザーを除くユーザーのidを取得
+    // public function getAllUsers(Int $user_id)
+    // {
+    //     return $this->Where('id', '<>', $user_id);
+    // }
+
+    // //フォローする
+    // public function follow(Int $user_id)
+    // {
+    //     return $this->follows()->attach($user_id);
+    // }
+    // //フォロー解除する
+    // public function unfollow(Int $user_id)
+    // {
+    //     return $this->follows()->detach($user_id);
+    // }
+    // //フォローしているかどうか
+    // public function isFollowing(Int $user_id){
+    //     //var_dump($user_id);
+    //     return (boolean) $this->follows()->where('followed_id',$user_id)->first();
+    // }
+    // //フォローされているかどうか
+    // public function isFollowed(Int $user_id){
+    //     return (boolean) $this->followers()->where('following_id',$user_id)->first();
+    // }
+
 }

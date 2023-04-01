@@ -19,7 +19,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            //return redirect(RouteServiceProvider::HOME);
+            return redirect('/home');//上の記述からこの記述に変えた。loginされている状態でlogin前のページにアクセスしようとすると404エラーページ（URLは/home）になってしまうため
         }
 
         return $next($request);

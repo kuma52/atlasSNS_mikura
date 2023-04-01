@@ -4,7 +4,7 @@
 
 <div id="clear">
   <div class="added-element bold">
-  <p>〇〇さん</p>
+  <p>{{ $username }}さん</p><!-- registercontrollerで定義した変数$username -->
   <p>ようこそ！AtlasSNSへ！</p>
   </div>
   <div class="added-element">
@@ -12,7 +12,7 @@
   <p>早速ログインをしてみましょう。</p>
   </div>
 
-  <p><a href="auth/login" class="btn">ログイン画面へ</a></p>
+  <p><a href="login" class="btn">ログイン画面へ</a></p>
 </div>
 
 @endsection

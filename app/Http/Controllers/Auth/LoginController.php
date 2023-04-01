@@ -27,19 +27,22 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/top';//ここを/homeから変更しました.ここをloginにするとどうなるか？
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    //↓ここをコメントアウトしました
     public function __construct()
     {
        $this->middleware('guest')->except('logout');
     }
-    //ここ↑
+    //↓4行足した
+    public function redirectPath()
+    {
+        return '/login';
+    }
 
     public function login(Request $request){
         if($request->isMethod('post')){
@@ -52,5 +55,12 @@ class LoginController extends Controller
             }
         }
         return view("auth.login");
+    }
+
+    //logoutメソッドが動いたら、loginルートが動く
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

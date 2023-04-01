@@ -17,10 +17,11 @@
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //Auth::routes();
-
+//use App\Http\Controllers\UsersController;いったんコメントアウト
+//use App\Http\Controllers\FollowsController;いったんコメントアウト
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
+Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
@@ -30,11 +31,28 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::group(['middleware' => ['auth']], function() {//loginしていなければlogin画面に返すようにする
+    Route::get('/top','PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+    Route::get('post/create', 'PostsController@create');
+    Route::post('post/create', 'PostsController@create');
 
-Route::get('/search','UsersController@index');
+    Route::get('post/update', 'PostsController@update');
+    Route::post('post/update', 'PostsController@update');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+    Route::get('post/{id}/delete', 'PostsController@delete');
+    Route::post('post/{id}/delete', 'PostsController@delete');
+
+    Route::get('/profile', 'UsersController@profile');
+    Route::post('/profile', 'UsersController@profile');
+    Route::get('/profileUpdate', 'UsersController@profileUpdate')->name('profileUpdate');
+    Route::post('/profileUpdate', 'UsersController@profileUpdate');
+
+    Route::get('/search', 'UsersController@search')->name('search');
+    //Route::post('/search', 'UsersController@search');
+
+    Route::get('/follow-list', 'PostsController@followList');
+    Route::get('/follower-list', 'PostsController@followerList');
+
+    Route::get('/logout', 'Auth\LoginController@logout');
+});

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -28,19 +29,17 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/top';//変更/homeから
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    // henkou
     public function __construct()
     {
        $this->middleware('guest');
     }
-    // henkou
 
     /**
      * Get a validator for an incoming registration request.
@@ -48,14 +47,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
-    }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -72,22 +64,37 @@ class RegisterController extends Controller
         ]);
     }
 
-
-    // public function registerForm(){
-    //     return view("auth.register");
-    // }
+    public function redirectPath()
+    {
+        return '/index';
+    }
 
     public function register(Request $request){
+        //メソッドpostでリクエストされたら
         if($request->isMethod('post')){
+            //データをインプットする
             $data = $request->input();
+            $username = $request->username;//→usernameをaddedページに渡すために定義
 
+            //createする前にバリデーションをかける。バリデートメソッドを呼び出して使用
+            $request->validate([
+                'username' => 'required|string|min:2|max:12',
+                'mail' => 'required|string|email|min:5|max:40|unique:users',
+                'password' => 'required|string|min:8|max:20|confirmed'
+            ]);
+
+            //バリデーションをパスしたら先に書いておいたcreateメソッドを呼び出して使い、DBに登録される
             $this->create($data);
-            return redirect('added');
+
+            return view('auth.added', ['username' => $username]);//上で定義したusernameを引数にしてページに反映させる
         }
         return view('auth.register');
     }
 
+
     public function added(){
         return view('auth.added');
     }
+
+
 }
