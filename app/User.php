@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\follow;
 
 class User extends Authenticatable
 {
@@ -54,30 +55,24 @@ class User extends Authenticatable
 //→このような関係性の場合は第三、第四引数は省略せずに中間テーブルのカラム名の記述をします。
 //※中間テーブルカラム名【リレーション元・先のテーブル名の単数形＿id】という規則性に当てはまらない
 
-    //引数で受け取ったログインユーザーを除くユーザーのidを取得
-    // public function getAllUsers(Int $user_id)
-    // {
-    //     return $this->Where('id', '<>', $user_id);
-    // }
 
-    // //フォローする
-    // public function follow(Int $user_id)
-    // {
-    //     return $this->follows()->attach($user_id);
-    // }
-    // //フォロー解除する
-    // public function unfollow(Int $user_id)
-    // {
-    //     return $this->follows()->detach($user_id);
-    // }
-    // //フォローしているかどうか
-    // public function isFollowing(Int $user_id){
-    //     //var_dump($user_id);
-    //     return (boolean) $this->follows()->where('followed_id',$user_id)->first();
-    // }
-    // //フォローされているかどうか
-    // public function isFollowed(Int $user_id){
-    //     return (boolean) $this->followers()->where('following_id',$user_id)->first();
-    // }
+    //フォローする
+    public function follow(Int $user_id)
+    {
+        return $this->follows()->attach($user_id);
+    }
+    //フォロー解除する
+    public function unfollow(Int $user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+    //フォローしているかどうか
+    public function isFollowing(Int $user_id){
+        return (boolean) $this->follows()->where('follow/followed_id',$user_id)->first();
+    }
+    //フォローされているかどうか
+    public function isFollowed(Int $user_id){
+        return (boolean) $this->followers()->where('following_id',$user_id)->first();
+    }
 
 }

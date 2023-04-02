@@ -32,24 +32,35 @@ Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
 Route::group(['middleware' => ['auth']], function() {//loginしていなければlogin画面に返すようにする
+  //topページ
+    //ページを表示
     Route::get('/top','PostsController@index');
-
+    //投稿
     Route::get('post/create', 'PostsController@create');
     Route::post('post/create', 'PostsController@create');
-
+    //投稿編集
     Route::get('post/update', 'PostsController@update');
     Route::post('post/update', 'PostsController@update');
-
+    //投稿削除
     Route::get('post/{id}/delete', 'PostsController@delete');
     Route::post('post/{id}/delete', 'PostsController@delete');
 
+  //profileページ
+    //ページを表示
     Route::get('/profile', 'UsersController@profile');
     Route::post('/profile', 'UsersController@profile');
+    //profileを編集
     Route::get('/profileUpdate', 'UsersController@profileUpdate')->name('profileUpdate');
     Route::post('/profileUpdate', 'UsersController@profileUpdate');
 
+  //searchページ
+    //検索ページの表示、検索機能
     Route::get('/search', 'UsersController@search')->name('search');
-    //Route::post('/search', 'UsersController@search');
+    Route::post('/search', 'UsersController@search');
+    //フォローする・やめる機能
+    Route::get('users/{id}/follow', 'FollowsController@follow')->name('follow');
+    //Route::post('users/{id}/follow', 'FollowsController@follow');
+    Route::delete('users/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
     Route::get('/follow-list', 'PostsController@followList');
     Route::get('/follower-list', 'PostsController@followerList');

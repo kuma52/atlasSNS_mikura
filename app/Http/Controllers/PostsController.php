@@ -16,11 +16,13 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    //viewの表示
+    //topページviewの表示
     public function index()
     {
-        $list = Post::latest()->get();//postsテーブルから新着順で全てのレコードを取得する
-        return view('posts.index', ['list'=>$list]);//表示したいファイル名と受け渡したいデータ名
+        //postsテーブルから新着順で全てのレコードを取得する
+        $list = Post::latest()->get();
+        //'表示したいファイル名'[受け渡したいデータ名]
+        return view('posts.index', ['list'=>$list]);
     }
 
     public function followList(){
@@ -49,14 +51,14 @@ class PostsController extends Controller
     }
 
 
-        //deleteメソッド
+    //投稿のdeleteメソッド
     public function delete($id)
     {
         Post::where('id', $id)->delete();
         return redirect('top');
     }
 
-    //updateメソッド
+    //投稿のupdateメソッド
     public function update(Request $request)
     {
         //フォームの値を別々の変数で取得

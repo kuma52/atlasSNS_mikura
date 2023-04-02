@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Follow;
 use Illuminate\Support\facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -94,28 +95,9 @@ class UsersController extends Controller
 
 
 
-    //searchページ
-    // public function search(Request $request){
-    //     //DBから全てのuserデータを取り出す
-    //     $users = User::all();
-    //     //値を変数に入れる
-    //     $keyword = $request->input('keyword');
-    //     $query = User::query();
-
-    //     //もし検索窓に値が入力されたら
-    //     if(!empty($keyword)) {
-    //         //名前かbioの中からキーワードをあいまい検索
-    //         $query->where('username', 'LIKE', "%{$keyword}%")
-    //         ->orwhere('bio', 'LIKE', "%{$keyword}%");
-    //     }
-
-    //     $users = $query->get();
-
-    //     return view('users.search')->with(['users' => $users]);
-    // }
-
-        public function search(Request $request){
-        //DBからログインuser以外の全てのuserデータを取り出す
+    //search機能 完了したからいじらない！
+    public function search(Request $request){
+        //DBから全てのuserデータを取り出す
         $users = User::all();
         //値を変数に入れる
         $keyword = $request->input('keyword');
@@ -130,13 +112,38 @@ class UsersController extends Controller
 
         $users = $query->get();
 
-        return view('users.search')->with(['users' => $users]);
+        return view('users.search')->with([
+            'users' => $users,
+            'keyword' => $keyword
+        ]);
     }
 
-//user_id は following_id
+    //フォロー機能
+    public function follow(User $user)
+    {
+        dd($user->id);
+        $follower = Auth::User();
+        //followしているかどうかをUserモデルからメソッド呼び出して判定
+        $is_following = $follower->isFollowing($user->id);
+        //もしフォローしていなかったら
+        if(!$is_following) {
+            //followする
+            $follower->follow($user->id);
+            return back();
+        }
+    }
 
-    // public function store($followingId){
-    //     Auth::users()->follows()->attach($followingId);
-    //     return;
-    // }
+    //フォローを外す
+    public function unfollow(User $user)
+    {
+        $follower = Auth::User();
+        //followしているかどうかをUserモデルからメソッド呼び出して判定
+        $is_following = $follower->isFollowing($user->id);
+        //もしフォローしていたら
+        if($is_following) {
+            //フォローを外す
+            $follower->unfollow($user->id);
+            return back();
+        }
+    }
 }
