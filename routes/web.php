@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
     Route::get('/search', 'UsersController@search')->name('search');
     Route::post('/search', 'UsersController@search');
     //フォローする・やめる機能
-    Route::get('users/{id}/follow', 'FollowsController@follow')->name('follow');
-    //Route::post('users/{id}/follow', 'FollowsController@follow');
+    Route::get('users/{id}/follow', 'FollowsController@follow');
+    Route::post('users/{id}/follow', 'FollowsController@follow')->name('follow');
     Route::delete('users/{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
     Route::get('/follow-list', 'PostsController@followList');
