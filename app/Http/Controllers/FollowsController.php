@@ -32,7 +32,7 @@ class FollowsController extends Controller
     //フォローを外す3回目
     public function unfollow(User $user)
     {
-        //dd($user);
+        //dd($user->id);
         $follower = Auth::User();
         //followしているかどうかをUserモデルからメソッド呼び出して判定
         $is_following = $follower->isFollowing($user->id);
@@ -96,7 +96,6 @@ class FollowsController extends Controller
     //         return false;
     //     }
     // }
-    //user_id は following_id
     // public function store($followingId){
     //     Auth::users()->follows()->attach($followingId);
     //     return;

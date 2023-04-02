@@ -36,16 +36,16 @@ class User extends Authenticatable
 
     //多対多のリレーション
     //フォローしているユーザーを取得
-    // public function following()
-    // {
-    //     return $this -> belongsToMany('App\User', 'follows','following_id','followed_id')->withTimestamps();
-    // }
+    public function following()
+    {
+        return $this -> belongsToMany('App\User', 'follows','following_id','followed_id')->withTimestamps();
+    }
 
     // //フォローされているユーザーを取得
-    // public function followed()
-    // {
-    //     return $this -> belongsToMany('App\User', 'follows', 'following_id', 'followed_id')->withTimestamps();
-    // }
+    public function followed()
+    {
+        return $this -> belongsToMany('App\User', 'follows', 'following_id', 'followed_id')->withTimestamps();
+    }
 
 
 //belongsToMany('①最終的な接続先モデル名','②中間テーブル名','③接続先モデルIDを示す中間テーブル内のカラム名','④接続元モデルIDのカラム名','⑤接続先モデルIDのカラム名','⑥最終的な接続先モデルIDのカラム名')
