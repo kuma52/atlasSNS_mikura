@@ -27,18 +27,10 @@
     </td>
     <td>{{ $users -> username }}</td>
     <td>
-      @if(Auth::id()->isFollowing($users->id))
-        {!! Form::open(['route' => ['unfollow'], 'method' => 'POST' ]) !!}
-        {{Form::token()}}
-        @csrf
-          <input type="submit" name="{$users->id}" class="">unfollow</input>
-        {!! Form::close() !!}
+      @if(Auth::user()->isFollowing($users->id))
+        <a class="" href="/users/{{$users->id}}/unfollow">unfollow</a>
       @else
-        {!! Form::open(['route' => ['follow'], 'method' => 'POST']) !!}
-        {{Form::token()}}
-        @csrf
-          <input type="submit" name="{$users->id}" class="">follow</input>
-        {!! Form::close() !!}
+        <a class="" href="/users/{{$users->id}}/follow">follow</a>
       @endif
     </td>
   </tr>

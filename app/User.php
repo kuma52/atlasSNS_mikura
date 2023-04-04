@@ -56,23 +56,24 @@ class User extends Authenticatable
 //※中間テーブルカラム名【リレーション元・先のテーブル名の単数形＿id】という規則性に当てはまらない
 
 
+  //上に書いたリレーションのメソッド(followingとfollowed)を使用して
     //フォローする
     public function follow(Int $user_id)
     {
-        return $this->follows()->attach($user_id);
+        return $this->following()->attach($user_id);
     }
     //フォロー解除する
     public function unfollow(Int $user_id)
     {
-        return $this->follows()->detach($user_id);
+        return $this->following()->detach($user_id);
     }
     //フォローしているかどうか
     public function isFollowing(Int $user_id){
-        return (boolean) $this->follows()->where('followed_id',$user_id)->first();
+        return (boolean) $this->following()->where('followed_id',$user_id)->first();
     }
     //フォローされているかどうか
     public function isFollowed(Int $user_id){
-        return (boolean) $this->followers()->where('following_id',$user_id)->first();
+        return (boolean) $this->followed()->where('following_id',$user_id)->first();
     }
 
 }

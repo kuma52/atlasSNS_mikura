@@ -51,7 +51,6 @@
     <tr>
       <td></td>
       <td>icon image</td>
-      <!-- <label for="file-upload"><td>{{ Form::file('new_image',null, ['class' => 'update-image', 'id' => 'file-upload']) }}</td></label> -->
       <td class="icon-form">
           <label for="file-upload" class="file-space">
               <input type="file" name="new_image" class="update-image" id="file-upload" accept=".jpg, .png, .bmp, .gif, .svg">

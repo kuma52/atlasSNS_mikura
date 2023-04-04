@@ -116,34 +116,8 @@ class UsersController extends Controller
             'users' => $users,
             'keyword' => $keyword
         ]);
+
+        return redirect('users.search',['users'=>$users]);
     }
 
-    //フォロー機能
-    public function follow(User $user)
-    {
-        dd($user->id);
-        $follower = Auth::User();
-        //followしているかどうかをUserモデルからメソッド呼び出して判定
-        $is_following = $follower->isFollowing($user->id);
-        //もしフォローしていなかったら
-        if(!$is_following) {
-            //followする
-            $follower->follow($user->id);
-            return back();
-        }
-    }
-
-    //フォローを外す
-    public function unfollow(User $user)
-    {
-        $follower = Auth::User();
-        //followしているかどうかをUserモデルからメソッド呼び出して判定
-        $is_following = $follower->isFollowing($user->id);
-        //もしフォローしていたら
-        if($is_following) {
-            //フォローを外す
-            $follower->unfollow($user->id);
-            return back();
-        }
-    }
 }
