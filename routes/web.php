@@ -60,8 +60,8 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
     //フォローする・やめる機能
     Route::get('users/{user}/follow', 'FollowsController@follow');
     Route::post('users/{user}/follow', 'FollowsController@follow')->name('follow');
-    Route::get('users/{users}/unfollow', 'FollowsController@unfollow');
-    Route::post('users/{users}/unfollow', 'FollowsController@unfollow')->name('unfollow');
+    Route::get('users/{user}/unfollow', 'FollowsController@unfollow');
+    Route::post('users/{user}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
     Route::get('/follow-list', 'PostsController@followList');
     Route::get('/follower-list', 'PostsController@followerList');

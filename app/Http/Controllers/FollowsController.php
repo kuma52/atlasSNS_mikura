@@ -19,7 +19,7 @@ class FollowsController extends Controller
     public function follow(User $user)
     {
         //dd($user->id);値渡せた！
-        $users = User::all();//未定義って言われるからusers定義してみた
+        //$users = User::all();//未定義って言われるからusers定義してみた
         $follower = Auth::User();
         //followしているかどうかをUserモデルからメソッド呼び出して判定
         $is_following = $follower->isFollowing($user->id);
@@ -27,7 +27,7 @@ class FollowsController extends Controller
         if(!$is_following) {
             //followする
             $follower->follow($user->id);
-            return view('users.search');//値渡してみた
+            return redirect('/search');//redirectなら【undefined variable】のエラーが出なかった
         }
     }
 
@@ -42,7 +42,7 @@ class FollowsController extends Controller
         if($is_following) {
             //フォローを外す
             $follower->unfollow($user->id);
-            return view('users.search');
+            return redirect('/search');
         }
     }
 
