@@ -17,7 +17,23 @@ class UsersController extends Controller
     //  * @return \Illuminate\Contracts\Validation\Validator
     //  */
 
-
+    //indexページにフォロー数とフォロワー数を表示させる
+    // public function showFollows(User $user, Follow $follow)
+    // {
+    //     //ログインユーザーの値を変数login_userに代入
+    //     $login_user = auth()->user();
+    //     $is_following = $login_user->isFollowing($user->id);
+    //     $is_followed = $login_user->isFollowed($user->id);
+    //     $follow_count = $follower->followingCount($user->id);
+    //     $follower_count = $follower->followerCount($user->id);
+    //     return view('index',[
+    //         'user' => $user,
+    //         'is_following' => $is_following,
+    //         'is_followed' => $is_followed,
+    //         'follow_count' => $follow_count,
+    //         'follower_count' => $follower_count
+    //     ]);
+    // }
 
     //profileページの表示
     public function profile(){
@@ -76,9 +92,9 @@ class UsersController extends Controller
 
             //もしname="new_image"にファイルが入っていたら
             if($request->hasFile('new_image')){
-                $request->validate([
-                    'new_image' => 'nullable|mimes:jpg, png, bmp, gif, svg'
-                ]);
+                // $request->validate([
+                //     'new_image' => 'nullable|mimes:jpg, png, bmp, gif, svg'
+                // ]);
                 //ファイル名を取得
                 $filename = $request->file('new_image')->getClientOriginalName();
                 //storeAsメソッドでファイルをpublicフォルダに格納

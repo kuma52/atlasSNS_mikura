@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;//以下追加した
 use App\User;
+use App\Follow;
 use Illuminate\Support\facades\Auth;
 use App\Http\Request\PostRequest;
 
@@ -20,9 +21,11 @@ class PostsController extends Controller
     public function index()
     {
         //postsテーブルから新着順で全てのレコードを取得する
-        $list = Post::latest()->get();
+        //$list = Post::latest()->get();
+        //postsテーブルから新着順で、自分と自分がfollowしている人のレコードをすべて取得する
+        $list = Post::query()->whereIn('user_id', Auth::user()->following()->pluck('followed_id'))->orWhere('user_id',Auth::user()->id)->latest()->get();
         //'表示したいファイル名'[受け渡したいデータ名]
-        return view('posts.index', ['list'=>$list]);
+        return view('posts.index', ['list' => $list]);
     }
 
     public function followList(){

@@ -41,16 +41,17 @@ class User extends Authenticatable
         return $this -> belongsToMany('App\User', 'follows','following_id','followed_id')->withTimestamps();
     }
 
-    // //フォローされているユーザーを取得
+    //フォローされているユーザーを取得
+    //第3、第4引数は上記リレーションと逆
     public function followed()
     {
-        return $this -> belongsToMany('App\User', 'follows', 'following_id', 'followed_id')->withTimestamps();
+        return $this -> belongsToMany('App\User', 'follows', 'followed_id', 'following_id')->withTimestamps();
     }
 
 
 //belongsToMany('①最終的な接続先モデル名','②中間テーブル名','③接続先モデルIDを示す中間テーブル内のカラム名','④接続元モデルIDのカラム名','⑤接続先モデルIDのカラム名','⑥最終的な接続先モデルIDのカラム名')
 
-//●リレーション元のusersテーブルのidと、followee_idが紐づいている
+//●リレーション元のusersテーブルのidと、follows_idが紐づいている
 //●リレーション先のusersテーブルとfollower_idが紐づいている
 //→このような関係性の場合は第三、第四引数は省略せずに中間テーブルのカラム名の記述をします。
 //※中間テーブルカラム名【リレーション元・先のテーブル名の単数形＿id】という規則性に当てはまらない
@@ -69,11 +70,11 @@ class User extends Authenticatable
     }
     //フォローしているかどうか
     public function isFollowing(Int $user_id){
-        return (boolean) $this->following()->where('followed_id',$user_id)->first();
+        return (boolean) $this->following()->where('followed_id', $user_id)->first();
     }
     //フォローされているかどうか
     public function isFollowed(Int $user_id){
-        return (boolean) $this->followed()->where('following_id',$user_id)->first();
+        return (boolean) $this->followed()->where('following_id', $user_id)->first();
     }
 
 }

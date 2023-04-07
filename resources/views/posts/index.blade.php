@@ -30,19 +30,21 @@
 <!-- タイムライン（自分、フォローしている人のアイコン、投稿、投稿日時を表示　自分の投稿には編集、削除ボタン） -->
 @foreach($list as $list)
 <div class="timeline">
-  <img src="images/{{ Auth::user()->images }}" alt="icon" class="icon-space">
+  <img src="storage/{{ $list->user->images }}" alt="icon" class="icon-space">
     <div class="">
-      <p>{{ $list->username }}</p><!-- ここの名前はたぶんDBのtable同士をなんかつなげたりとかしないと反映されないんだと思う。posts-tableには名前カラムはない。users-tableにはあるからidとuser_idとをなんか頼りにしてやるんだと思う→リレーションってやつ -->
+      <p>{{ $list->user->username }}</p>
       <p class="posts-area">{{ $list->post }}</p>
     </div>
     <div >
       <p>{{ $list->created_at }}</p>
     </div>
 </div><!-- /timeline -->
+<!-- たぶんifを使って、自分以外の人の投稿にはボタンを出さないようにする -->
       <div class="button-area">
         <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img src="images/edit.png" alt="編集"></a>
         <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')"><img src="images/trash.png" alt="削除"></a>
       </div>
+<!-- えんどいふ -->
 {!! Form::close() !!}
 
 <span class="line thin"></span><!-- 細いグレーの線 -->

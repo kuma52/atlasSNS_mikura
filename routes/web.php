@@ -30,8 +30,14 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
+
 //ログイン中のページ
 Route::group(['middleware' => ['auth']], function() {//loginしていなければlogin画面に返すようにする
+
+//   //前ページ共通（login.blade）
+//     //フォロー・フォロワー数を渡す
+    Route::get('/top','FollowsController@showFollows');
+
   //topページ
     //ページを表示
     Route::get('/top','PostsController@index');
@@ -63,7 +69,10 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
     Route::get('users/{user}/unfollow', 'FollowsController@unfollow');
     Route::post('users/{user}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
+  //follow-Listページ
     Route::get('/follow-list', 'PostsController@followList');
+
+
     Route::get('/follower-list', 'PostsController@followerList');
 
     Route::get('/logout', 'Auth\LoginController@logout');

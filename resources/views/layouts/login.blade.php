@@ -51,12 +51,12 @@
                 <p>{{ Auth::user()->username }}　さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth()->user()->following->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list" class="blue-button">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth()->user()->followed->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list" class="blue-button">フォロワーリスト</a></p>
             </div>

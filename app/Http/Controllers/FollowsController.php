@@ -5,21 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Follow;
 use App\User;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 
 class FollowsController extends Controller
 {
     //
-    public function followList(){
+    public function followList()
+    {
+        // $follows_timeline = Post::query()->whereIn('user_id', Auth::user()->following()->pluck('followed_id'))->latest()->get();
+        $following_id = Auth::user()->following()->pluck('followed_id');
+        $follows_timeline = Post::with('user')->whereIn('user_id',$following_id)->latest()->get();
 
-        return view('follows.followList');
+        return redirect('/follows/followList', compact('follows_timeline'));
     }
 
-        //フォロー機能3回目
+        //フォロー機能
     public function follow(User $user)
     {
         //dd($user->id);値渡せた！
-        //$users = User::all();//未定義って言われるからusers定義してみた
         $follower = Auth::User();
         //followしているかどうかをUserモデルからメソッド呼び出して判定
         $is_following = $follower->isFollowing($user->id);
@@ -27,11 +31,11 @@ class FollowsController extends Controller
         if(!$is_following) {
             //followする
             $follower->follow($user->id);
-            return redirect('/search');//redirectなら【undefined variable】のエラーが出なかった
+            return redirect('/search');
         }
     }
 
-    //フォローを外す3回目
+    //フォローを外す
     public function unfollow(User $user)
     {
         //dd($user->id);
@@ -45,63 +49,6 @@ class FollowsController extends Controller
             return redirect('/search');
         }
     }
-
-    //follow２
-    // public function follow(User $user)
-    // {
-    //     //var_dump($user->id);
-    //     //$id = User::all();
-    //     //$id = User::where('id');
-    //     //$user = User::find($id);
-    //     var_dump($user);
-    //     //$follower = auth()->user();
-    //     $follower = Auth::user();
-    //     //フォローしているか
-    //     $is_following = $follower->isFollowing($user->id);
-    //     if(!$is_following) {
-    //         //フォローしていなければフォローする
-    //         $follower->follow($user->id);
-    //         return back();
-    //     }
-    // }
-    // //unfollow２
-    // public function unfollow(User $user)
-    // {
-    //     $follower = auth()->user();
-    //     //フォローしているか
-    //     $is_following = $follower->isFollowing($user->id);
-    //     if($is_following) {
-    //         //フォローしていなければフォロー解除する
-    //         $follower->unfollow($user->id);
-    //         return back();
-    //     }
-    // }
-
-    //フォローする機能
-    // public function follows(Request $request)
-    // {
-    //     Follows::firstOrCreate([
-    //         'followed_id' => $request->post_user,
-    //         'following_id' => $request->auth_user
-    //     ]);
-    //     return true;
-    // }
-
-    // public function unfollow(Request $request)
-    // {
-    //     $follow = Follows::where('followed_id', $request->post_user)
-    //         ->where('following_id', $request->auth_user)
-    //         ->first();
-    //     if ($follow) {
-    //         $follow->delete();
-    //         var_dump($follow);//デバッグ
-    //         return false;
-    //     }
-    // }
-    // public function store($followingId){
-    //     Auth::users()->follows()->attach($followingId);
-    //     return;
-    // }
 
     public function followerList(){
         return view('follows.followerList');
