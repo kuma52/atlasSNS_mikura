@@ -70,10 +70,10 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
     Route::post('users/{user}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
   //follow-Listページ
-    Route::get('/follow-list', 'PostsController@followList');
+    Route::get('/follow-list', 'FollowsController@followList');
 
 
-    Route::get('/follower-list', 'PostsController@followerList');
+    Route::get('/follower-list', 'FollowsController@followerList');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 });

@@ -5,14 +5,14 @@
     <h2>Follow List</h2>
     <!-- followしてるuserのアイコンを１０個ずつ横並びにする -->
     <!-- ↓アイコンクリックしたらその人のplofileページに遷移 -->
-
+@foreach($follow_icons as $follow_icons)
     <tr>
         <td>
-            <a href=""><img src="storage/{{ Auth::user()->images }}" alt="icon" class="icon-space"></a>
-</div>
+            <a href=""><img src="storage/{{ $follow_icons->images }}" alt="icon" class="icon-space"></a>
         </td>
     </tr>
-
+@endforeach
+</div>
 <span class="bold line"></span><!-- グレーの線 -->
 
 <!-- フォローしている人の投稿を新しい順に表示 -->

@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class FollowsController extends Controller
 {
     //
-    public function followList()
-    {
-        // $follows_timeline = Post::query()->whereIn('user_id', Auth::user()->following()->pluck('followed_id'))->latest()->get();
-        $following_id = Auth::user()->following()->pluck('followed_id');
-        $follows_timeline = Post::with('user')->whereIn('user_id',$following_id)->latest()->get();
-
-        return redirect('/follows/followList', compact('follows_timeline'));
-    }
 
         //フォロー機能
     public function follow(User $user)
@@ -50,7 +42,27 @@ class FollowsController extends Controller
         }
     }
 
+
+    public function followList(Post $post, User $user, Follow $follow)
+    {
+        //following_idという変数で置換
+        $following_id = Auth::user()->following()->pluck('followed_id');
+        //following_idをもとに、postテーブルから投稿をひっぱり出す
+        $follows_timeline = Post::with('user')->whereIn('user_id',$following_id)->latest()->get();
+//dd($follows_timeline);
+        //following_idをもとに、Usersテーブルからimagesを取得したい
+        // $follow_icons = Post::with('user')->whereIn('id', $following_id)->get();
+        //userテーブルから直接値をとるから、Userモデルを使って書く
+        $follow_icons = User::whereIn('id', $following_id)->get();
+ //dd($follow_icons);
+
+        return view('follows.followList', compact('follows_timeline', 'follow_icons'));
+    }
+
+
     public function followerList(){
-        return view('follows.followerList');
+        $followed_id = Auth::user()->followed()->pluck('following_id');
+        $followed_timeline = Post::with('user')->whereIn('user_id',$followed_id)->latest()->get();
+        return view('follows.followerList', compact('followed_timeline'));
     }
 }
