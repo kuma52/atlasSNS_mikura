@@ -8,7 +8,6 @@
     <title>AtlasSNS</title>
 
     <!-- css -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
 
@@ -27,7 +26,9 @@
 <body>
     <header>
         <div id="head">
-        <h1><a href="/top"><img src="images/atlas.png" alt="Atlas"></a></h1>
+        <h1>
+            <a href="/top"><img src="{{ asset('images/atlas.png') }}" alt="Atlas"></a>
+        </h1>
             <div id="menu">
                 <div id="username">
                     <p>{{ Auth::user()->username }}　さん　<span class="arrow"></span></p>
@@ -37,7 +38,7 @@
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
-                <img src="storage/{{ Auth::user()->images }}" alt="my-icon" class="my-icon icon-space">
+                <img src="{{ \Storage::url(Auth::user()->images) }}" alt="my-icon" class="my-icon icon-space">
             </div>
         </div>
     </header>

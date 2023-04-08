@@ -2,17 +2,19 @@
 
 @section('content')
 <div>
-    <h2>Follow List</h2>
+    <h2>Follower List</h2>
     <!-- followしてるuserのアイコンを１０個ずつ横並びにする -->
     <!-- ↓アイコンクリックしたらその人のplofileページに遷移 -->
-
+@foreach($followed_icons as $followed_icons)
     <tr>
         <td>
-            <a href=""><img src="storage/{{ $followed_timeline->user->images }}" alt="icon" class="icon-space"></a>
-</div>
+            <a href="users/{{ $followed_icons->id }}/user-profile">
+                <img src="storage/{{ $followed_icons->images }}" alt="icon" class="icon-space">
+            </a>
         </td>
     </tr>
-
+@endforeach
+</div>
 <span class="bold line"></span><!-- グレーの線 -->
 
 <!-- フォローしている人の投稿を新しい順に表示 -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 use App\Follow;
 use Illuminate\Support\facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,24 +17,6 @@ class UsersController extends Controller
     //  * @param  array  $data
     //  * @return \Illuminate\Contracts\Validation\Validator
     //  */
-
-    //indexページにフォロー数とフォロワー数を表示させる
-    // public function showFollows(User $user, Follow $follow)
-    // {
-    //     //ログインユーザーの値を変数login_userに代入
-    //     $login_user = auth()->user();
-    //     $is_following = $login_user->isFollowing($user->id);
-    //     $is_followed = $login_user->isFollowed($user->id);
-    //     $follow_count = $follower->followingCount($user->id);
-    //     $follower_count = $follower->followerCount($user->id);
-    //     return view('index',[
-    //         'user' => $user,
-    //         'is_following' => $is_following,
-    //         'is_followed' => $is_followed,
-    //         'follow_count' => $follow_count,
-    //         'follower_count' => $follower_count
-    //     ]);
-    // }
 
     //profileページの表示
     public function profile(){
@@ -135,5 +118,13 @@ class UsersController extends Controller
 
         return redirect('users.search',['users'=>$users]);
     }
+
+    //ログインユーザー以外のユーザーのプロフィールページ
+    public function userProfile($id)
+{
+    $user = User::where('id', $id)->get();
+    $users_timeline = Post::with('user')->where('user_id', $id)->latest()->get();
+    return view('users.userProfile', compact('user', 'users_timeline'));
+}
 
 }

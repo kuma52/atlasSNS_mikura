@@ -71,9 +71,10 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
 
   //follow-Listページ
     Route::get('/follow-list', 'FollowsController@followList');
-
-
     Route::get('/follower-list', 'FollowsController@followerList');
+
+    //userPlofileページ
+    Route::get('users/{id}/user-profile','UsersController@userProfile');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 });

@@ -8,7 +8,7 @@
 @foreach($follow_icons as $follow_icons)
     <tr>
         <td>
-            <a href=""><img src="storage/{{ $follow_icons->images }}" alt="icon" class="icon-space"></a>
+            <a href="users/{{ $follow_icons->id }}/user-profile"><img src="storage/{{ $follow_icons->images }}" alt="icon" class="icon-space"></a>
         </td>
     </tr>
 @endforeach
@@ -20,7 +20,7 @@
 @foreach($follows_timeline as $follows_timeline)
             <div class="timeline">
                 <!-- ↓アイコンクリックしたらその人のplofileページに遷移 -->
-                <a href=""><img src="storage/{{ $follows_timeline->user->images }}" alt="icon" class="icon-space"></a>
+                <a href="users/{{ $follows_timeline->user->id }}/user-profile"><img src="storage/{{ $follows_timeline->user->images }}" alt="icon" class="icon-space"></a>
                 <div class="">
                     <p>{{ $follows_timeline->user->username }}</p>
                     <p class="posts-area">{{ $follows_timeline->post }}</p>

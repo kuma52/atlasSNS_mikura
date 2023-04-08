@@ -2,10 +2,9 @@
 @extends('layouts.login')
 
 @section('content')
-<!-- <h2>機能を実装していきましょう。</h2> -->
-<!-- 投稿機能（アイコン、150字まで、「投稿内容を入力してください」、送信ボタン） -->
+<!-- 新規投稿エリア -->
 <div class="newpost-wrapper">
-    <img src="storage/{{ Auth::user()->images }}" alt="my-icon" class="icon-space newpost-place">
+    <div class="icon-wrapper"><img src="storage/{{ Auth::user()->images }}" alt="my-icon" class="icon-space newpost-place"></div>
     {!! Form::open(['url' => 'post/create']) !!}
     {{Form::token()}}
     @csrf
@@ -27,7 +26,7 @@
 
 <span class="bold line"></span><!-- グレーの線 -->
 
-<!-- タイムライン（自分、フォローしている人のアイコン、投稿、投稿日時を表示　自分の投稿には編集、削除ボタン） -->
+<!-- タイムライン -->
 @foreach($list as $list)
 <div class="timeline">
   <img src="storage/{{ $list->user->images }}" alt="icon" class="icon-space">
@@ -39,12 +38,14 @@
       <p>{{ $list->created_at }}</p>
     </div>
 </div><!-- /timeline -->
-<!-- たぶんifを使って、自分以外の人の投稿にはボタンを出さないようにする -->
+<!-- 自分以外の投稿にはボタンを出さない -->
+      @if($list->user_id == Auth::id())
       <div class="button-area">
         <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img src="images/edit.png" alt="編集"></a>
         <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')"><img src="images/trash.png" alt="削除"></a>
       </div>
-<!-- えんどいふ -->
+      @else
+      @endif
 {!! Form::close() !!}
 
 <span class="line thin"></span><!-- 細いグレーの線 -->
@@ -70,7 +71,7 @@
             </ul>
           </div>
           <br>
-@endif
+          @endif
       </div>
   </div>
 
