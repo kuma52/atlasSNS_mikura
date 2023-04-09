@@ -30,21 +30,25 @@
 @foreach($list as $list)
 <div class="timeline">
   <img src="storage/{{ $list->user->images }}" alt="icon" class="icon-space">
-    <div class="">
-      <p>{{ $list->user->username }}</p>
-      <p class="posts-area">{{ $list->post }}</p>
+    <div>
+      <p class="timeline-content bold-text">{{ $list->user->username }}</p>
+      <p class="timeline-content posts-area">{{ $list->post }}</p>
     </div>
-    <div >
-      <p>{{ $list->created_at }}</p>
+    <div class="timeline-content created-at">
+      <p class="">{{ $list->created_at }}</p>
     </div>
 </div><!-- /timeline -->
-<!-- 自分以外の投稿にはボタンを出さない -->
+<!-- 自分以外の投稿にはボタンを出さない = postsテーブルのuser_idとログインuserのidが一致したらボタンを出す -->
       @if($list->user_id == Auth::id())
-      <div class="button-area">
-        <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img src="images/edit.png" alt="編集"></a>
-        <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')"><img src="images/trash.png" alt="削除"></a>
-      </div>
-      @else
+        <div class="button-area">
+          <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img class="btn" src="images/edit.png" alt="編集"></a>
+          <!-- <div class="deletebtn"> -->
+            <a  href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
+              <img id="deletebtn" class="btn" src="images/trash.png" onmouseover="mouseon();" onmouseout="mouseout();" alt="削除">
+              <!-- <img class="btn" src="images/trash-h.png" alt="削除"> -->
+            </a>
+          <!-- </div> -->
+        </div>
       @endif
 {!! Form::close() !!}
 

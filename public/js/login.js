@@ -8,27 +8,6 @@ $(".arrow").click(function () {
   $(".nav").slideToggle();
 })
 
-//投稿編集画面の表示/非表示
-// $(".iframe-open").modaal({
-//   type: 'iframe',
-//   width: '300',
-//   height: '300',
-//   overlay_close: 'true',
-//   background: 'rgba(0,0,0,0.3)',
-// });
-// $(".iframe-open").modaal({
-//   type: 'iframe',
-//   width: 800,//iframe横幅
-//   height: 800,//iframe高さ
-//   overlay_close: true,//モーダル背景クリック時に閉じるか
-//   before_open: function () {// モーダルが開く前に行う動作
-//     $('html').css('overflow-y', 'hidden');/*縦スクロールバーを出さない*/
-//   },
-//   after_close: function () {// モーダルが閉じた後に行う動作
-//     $('html').css('overflow-y', 'scroll');/*縦スクロールバーを出す*/
-//   }
-// });
-
 //投稿編集画面のmodal
 $(".modal-open").on('click', function () {
   $('.modal').fadeIn();
@@ -72,4 +51,12 @@ function follow(followingId) {
 }
 
 
-//user_id は following_id
+//index 削除ボタンにホバーしたとき色を赤白反転させる
+function mouseon() {
+  let elm = document.getElementById("deletebtn");
+  elm.src = "images/trash-h.png";
+}
+function mouseout() {
+  let elm = document.getElementById("deletebtn");
+  elm.src = "images/trash.png";
+}

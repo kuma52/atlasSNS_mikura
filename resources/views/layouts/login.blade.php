@@ -8,6 +8,7 @@
     <title>AtlasSNS</title>
 
     <!-- css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
 
@@ -22,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
 </head>
+
 
 <body>
     <header>
@@ -43,6 +45,7 @@
         </div>
     </header>
 
+
     <div id="row">
         <div id="container">
             @yield('content')
@@ -50,25 +53,26 @@
         <div id="side-bar">
             <div id="confirm">
                 <p>{{ Auth::user()->username }}　さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ Auth()->user()->following->count() }}名</p>
+                <div class="d-flex justify-content-around">
+                    <p>フォロー数</p>
+                    <p>{{ Auth()->user()->following->count() }}名</p>
                 </div>
-                <p class="btn"><a href="/follow-list" class="blue-button">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ Auth()->user()->followed->count() }}名</p>
+                <a href="/follow-list" class="btn btn-primary">フォローリスト</a>
+                <div class="d-flex justify-content-around">
+                    <p>フォロワー数</p>
+                    <p>{{ Auth()->user()->followed->count() }}名</p>
                 </div>
-                <p class="btn"><a href="/follower-list" class="blue-button">フォロワーリスト</a></p>
+                <a href="/follower-list" class="btn btn-primary">フォロワーリスト</a>
             </div>
 
             <span class="line short"></span><!-- 横線 -->
 
-            <p class="btn"><a href="/search" class="blue-button">ユーザー検索</a></p>
+            <a href="/search" class="btn btn-primary">ユーザー検索</a>
         </div>
     </div>
     <footer>
     </footer>
+
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
