@@ -42,12 +42,9 @@
       @if($list->user_id == Auth::id())
         <div class="button-area">
           <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img class="btn" src="images/edit.png" alt="編集"></a>
-          <!-- <div class="deletebtn"> -->
-            <a  href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
+            <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
               <img id="deletebtn" class="btn" src="images/trash.png" onmouseover="mouseon();" onmouseout="mouseout();" alt="削除">
-              <!-- <img class="btn" src="images/trash-h.png" alt="削除"> -->
             </a>
-          <!-- </div> -->
         </div>
       @endif
 {!! Form::close() !!}

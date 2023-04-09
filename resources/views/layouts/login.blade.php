@@ -57,12 +57,12 @@
                     <p>フォロー数</p>
                     <p>{{ Auth()->user()->following->count() }}名</p>
                 </div>
-                <a href="/follow-list" class="btn btn-primary">フォローリスト</a>
+                <p><a href="/follow-list" class="btn btn-primary">フォローリスト</a></p>
                 <div class="d-flex justify-content-around">
                     <p>フォロワー数</p>
                     <p>{{ Auth()->user()->followed->count() }}名</p>
                 </div>
-                <a href="/follower-list" class="btn btn-primary">フォロワーリスト</a>
+                <div class="text-right"><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></div>
             </div>
 
             <span class="line short"></span><!-- 横線 -->
