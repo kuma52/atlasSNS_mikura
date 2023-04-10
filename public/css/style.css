@@ -38,6 +38,16 @@ img {
     font-weight: 600;
 }
 
+.bold::before {
+    height: 7px;
+    width: 80%;
+}
+
+.thin::before {
+    height: 1px;
+    width: 80%;
+}
+
 /* layout.login */
 /* header */
 header {
@@ -70,6 +80,7 @@ h1 {
 h1 a img {
     width: 170px;
     height: auto;
+    padding-bottom: 15px;
 }
 
 .my-icon {
@@ -109,10 +120,8 @@ h1 a img {
 
 .nav {
     display: none;
-    /* height: 120px; */
-    /* width: 150px;幅を％で設定 */
     width: 20%;
-    position: fixed;
+    position: absolute;
     top: 100px;
     right: 0px;
     text-align: center;
@@ -130,10 +139,11 @@ h1 a img {
 }
 
 .nav li a {
-    height: 40px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #727272;
 }
 
 .nav li:hover {
@@ -151,15 +161,9 @@ h1 a img {
     border-left: 1px solid #727272;
 }
 
-/* .blue-button {
-    width: 100px;
-    height: 35px; */
-/* margin: 100px 10px; */
-/* padding: 10px;
-    background-color: #186AC9;
-    color: #fff;
-    border-radius: 5px;
-} */
+#confirm {
+    padding-bottom: 10px;
+}
 
 .short::before {
     height: 1px;
@@ -171,13 +175,31 @@ h1 a img {
     margin: 3px 0;
 }
 
-#side-bar p {
+#side-bar .left {
     margin-right: auto;
     padding: 10px 0 10px 15px;
 }
 
-#confirm a {
+.btn-position {
     text-align: right;
+}
+
+#side-bar .btn {
+    width: 160px;
+    background-color: #186AC9;
+}
+
+.wrapper {
+    width: 170px;
+    justify-content: space-between;
+}
+
+.pt-5 {
+    text-align: center;
+}
+
+#side-bar a {
+    border-radius: 7px;
 }
 
 /* layout.login */
@@ -189,13 +211,6 @@ h1 a img {
 
 #container {
     flex: 0 0 80%;
-}
-
-
-/* index(top) */
-.bold::before {
-    height: 7px;
-    width: 80%;
 }
 
 /* index(top) */
@@ -234,13 +249,9 @@ h1 a img {
     margin-left: 100px;
 }
 
-.thin::before {
-    height: 1px;
-    width: 80%;
-}
-
 .posts-area {
-    width: 250px;
+    width: 100%;
+    /* background-color: #727272; */
 }
 
 .created-at {
@@ -369,3 +380,26 @@ label::after {
 }
 
 .file-space {}
+
+/* searchページ */
+.userlist-wrapper {
+    background-color: beige;
+    height: 55px;
+    margin: 40px auto 0;
+    width: 400px;
+}
+
+.userlist-wrapper:first-of-type {
+    margin-top: 30px;
+}
+
+/* .userlist {
+    background-color: beige;
+    height: 55px;
+    margin: 20px auto;
+    width: 400px;
+} */
+
+.name-holder {
+    width: 50px;
+}

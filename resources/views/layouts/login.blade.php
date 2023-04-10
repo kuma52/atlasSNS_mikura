@@ -35,6 +35,8 @@
                 <div id="username">
                     <p>{{ Auth::user()->username }}　さん　<span class="arrow"></span></p>
                 </div>
+
+                <!-- ナビゲーションメニュー -->
                 <ul class="nav">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
@@ -52,22 +54,22 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>{{ Auth::user()->username }}　さんの</p>
-                <div class="d-flex justify-content-around">
-                    <p>フォロー数</p>
-                    <p>{{ Auth()->user()->following->count() }}名</p>
+                <p class="left">{{ Auth::user()->username }}　さんの</p>
+                <div class="d-flex wrapper">
+                    <p class="left">フォロー数</p>
+                    <p class="left">{{ Auth()->user()->following->count() }}名</p>
                 </div>
-                <p><a href="/follow-list" class="btn btn-primary">フォローリスト</a></p>
-                <div class="d-flex justify-content-around">
-                    <p>フォロワー数</p>
-                    <p>{{ Auth()->user()->followed->count() }}名</p>
+                <p class="btn-position"><a href="/follow-list" class="btn btn-primary">フォローリスト</a></p>
+                <div class="d-flex wrapper">
+                    <p class="left">フォロワー数</p>
+                    <p class="left">{{ Auth()->user()->followed->count() }}名</p>
                 </div>
-                <div class="text-right"><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></div>
+                <p class="btn-position"><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></p>
             </div>
 
             <span class="line short"></span><!-- 横線 -->
 
-            <a href="/search" class="btn btn-primary">ユーザー検索</a>
+            <p class="pt-5"><a href="/search" class="btn btn-primary">ユーザー検索</a></p>
         </div>
     </div>
     <footer>

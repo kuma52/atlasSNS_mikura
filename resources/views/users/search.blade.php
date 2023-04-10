@@ -15,17 +15,17 @@
 
 <span class="bold line"></span><!-- グレーの線 -->
 
-<!-- ページ遷移後すぐは、自分以外の全登録ユーザーを表示 -->
-<!-- 検索かけたらその結果絞られたユーザーのみ表示 -->
-<!-- アイコン、名前、ボタン（フォローする、解除） -->
+<!-- 自分以外の全userリスト-->
+
 @foreach($users as $users)
 @if(Auth::id() != $users->id)
-<div>
+<div class="userlist-wrapper">
+  <div class="userlist">
   <tr>
     <td>
       <img src="storage/{{ $users -> images }}" alt="icon" class="icon-space">
     </td>
-    <td>{{ $users -> username }}</td>
+    <td class="name-holder">{{ $users -> username }}</td>
     <td>
       @if(Auth::user()->isFollowing($users->id))
         <a class="" href="/users/{{$users->id}}/unfollow">unfollow</a>
@@ -34,9 +34,11 @@
       @endif
     </td>
   </tr>
+  </div>
 </div>
 @endif
 @endforeach
+
 
 
 
