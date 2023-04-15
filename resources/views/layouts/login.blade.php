@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
 
+    <!--font awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -54,7 +57,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p class="left">{{ Auth::user()->username }}　さんの</p>
+                <p class="left">{{ Auth::user()->username }}さんの</p>
                 <div class="d-flex wrapper">
                     <p class="left">フォロー数</p>
                     <p class="left">{{ Auth()->user()->following->count() }}名</p>

@@ -8,6 +8,9 @@ use App\User;
 use App\Follow;
 use Illuminate\Support\facades\Auth;
 use App\Http\Request\PostRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class PostsController extends Controller
 {
@@ -72,6 +75,11 @@ class PostsController extends Controller
         $request->validate([
             'post' => 'required|min:1|max:200',
         ]);
+        // //もしバリデーションに引っかかったら、
+        // if($request->fails()){
+        //     //モーダル画面に戻る
+        //     return back();
+        // }
         //バリデーション通過したらupdate
         Post::where('id', $id)->update([
             'post' => $up_post
@@ -79,4 +87,25 @@ class PostsController extends Controller
 
         return redirect('top');
     }
+
+    // public function update(Request $request)
+    // {
+    //     //フォームの値を別々の変数で取得
+    //     $id = $request->input('post_id');
+    //     $up_post = $request->input('post');
+
+    //     $validate = Validator::make($request->all(),[
+    //         'post' => 'required|min:1|max:200',
+    //     ]);
+
+    //     if($validate->fails()){
+    //         return back();
+    //     }
+    //     //バリデーション通過したらupdate
+    //     Post::where('id', $id)->update([
+    //         'post' => $up_post
+    //     ]);
+
+    //     return redirect('top');
+    // }
 }

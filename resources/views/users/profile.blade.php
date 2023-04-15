@@ -20,33 +20,32 @@
     {{Form::token()}}
     @csrf
 
-
-<table>
+<table id="profile">
   <tbody>
     <tr>
-      <td class="icon-wrapper"><img src="storage/{{ Auth::user()->images }}" alt="my-icon" class="icon-space"></td>
+      <td class="icon-wrapper"><p><img src="storage/{{ Auth::user()->images }}" alt="my-icon" class="icon-space"></p></td>
       <td>user name</td>
-      <td>{{ Form::text('name', Auth::user()->username, ['class' => 'update']) }}</td>
+      <td class="p-content">{{ Form::text('name', Auth::user()->username, ['class' => 'update']) }}</td>
     </tr>
     <tr>
       <td></td>
       <td>mail address</td>
-      <td>{{ Form::text('mail', Auth::user()->mail,['class' => 'update']) }}</td>
+      <td class="p-content">{{ Form::text('mail', Auth::user()->mail,['class' => 'update']) }}</td>
     </tr>
     <tr>
       <td></td>
       <td>password</td>
-      <td>{{ Form::password('newpassword',['class' => 'update']) }}</td>
+      <td class="p-content">{{ Form::password('newpassword',['class' => 'update']) }}</td>
     </tr>
     <tr>
       <td></td>
       <td>password confirm</td>
-      <td>{{ Form::password('newpassword_confirmation',['class' => 'update']) }}</td>
+      <td class="p-content">{{ Form::password('newpassword_confirmation',['class' => 'update']) }}</td>
     </tr>
     <tr>
       <td></td>
       <td>bio</td>
-      <td>{{ Form::text('bio', Auth::user()->bio, ['class' => 'update']) }}</td>
+      <td class="p-content">{{ Form::text('bio', Auth::user()->bio, ['class' => 'update']) }}</td>
     </tr>
     <tr>
       <td></td>
@@ -59,9 +58,11 @@
     </tr>
   </tbody>
 </table>
-<!-- bootstrapでcss整える↓ -->
-<!-- <input type="button" class="button" value="更新"> -->
-{{Form::submit('更新',['class'=>'btn'])}}
+
+<div id="update-btn">
+{{Form::submit('更新',['class'=>'btn btn-danger update-btn'])}}
+</div>
+
 {!! Form::close() !!}
 
 

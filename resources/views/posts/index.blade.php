@@ -24,7 +24,7 @@
   <br>
 @endif
 
-<span class="bold line"></span><!-- グレーの線 -->
+<div class="line-wrapper"><span class="bold line"></span></div><!-- グレーの線 -->
 
 <!-- タイムライン -->
 @foreach($list as $list)
@@ -35,21 +35,24 @@
       <p class="timeline-content posts-area">{{ $list->post }}</p>
     </div>
     <div class="timeline-content created-at">
-      <p class="">{{ $list->created_at }}</p>
+      <p>{{ $list->created_at }}</p>
     </div>
 </div><!-- /timeline -->
 <!-- 自分以外の投稿にはボタンを出さない = postsテーブルのuser_idとログインuserのidが一致したらボタンを出す -->
       @if($list->user_id == Auth::id())
         <div class="button-area">
-          <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img class="btn" src="images/edit.png" alt="編集"></a>
+          <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img class="btn" src="images/edit3.png" alt="編集"></a>
             <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
-              <img id="deletebtn" class="btn" src="images/trash.png" onmouseover="mouseon();" onmouseout="mouseout();" alt="削除">
+              <div class="trash-container">
+                <img src="images/trash-h3.png" class="trash-h" alt="削除">
+                <img class="btn" src="images/trash2.png" alt="削除">
+              </div>
             </a>
         </div>
       @endif
 {!! Form::close() !!}
 
-<span class="line thin"></span><!-- 細いグレーの線 -->
+<div class="thin-wrapper"><span class="line thin"></span></div><!-- 細いグレーの線 -->
 @endforeach
 
 <!-- モーダル中身 -->

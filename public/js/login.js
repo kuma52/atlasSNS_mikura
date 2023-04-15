@@ -17,14 +17,14 @@ $(".modal-open").on('click', function () {
   //クリックされたらpost_idを取得して変数へ格納
   var post_id = $(this).attr('post_id');
 
-  //var id = $(this).attr('id');
+
 
   //取得した投稿内容（post）をmodalの中へ渡す
   $('.modal-post').text(post);
   //取得した投稿のidをmodalへ渡す
   $('.modal-id').val(post_id);
 
-  //$('')
+
 
   return false;
 });
@@ -51,12 +51,12 @@ function follow(followingId) {
 }
 
 
-//index 削除ボタンにホバーしたとき色を赤白反転させる
-function mouseon() {
-  let elm = document.getElementById("deletebtn");
-  elm.src = "images/trash-h.png";
-}
-function mouseout() {
-  let elm = document.getElementById("deletebtn");
-  elm.src = "images/trash.png";
-}
+// //index 削除ボタンにホバーしたとき色を赤白反転させる
+// function mouseon() {
+//   let elm = document.getElementById("deletebtn");
+//   elm.src = "images/trash-h.png";
+// }
+// function mouseout() {
+//   let elm = document.getElementById("deletebtn");
+//   elm.src = "images/trash.png";
+// }

@@ -89,7 +89,7 @@ class UsersController extends Controller
             }
         }
 
-        return redirect('profile');
+        return redirect('/top');
     }
 
 
