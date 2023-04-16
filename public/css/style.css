@@ -570,6 +570,7 @@ h2 {
     margin-top: auto;
 }
 
-#user-profile .btn-area .btn-danger {
+#user-profile .btn-area {
     width: 150px;
+    margin-right: 20px;
 }

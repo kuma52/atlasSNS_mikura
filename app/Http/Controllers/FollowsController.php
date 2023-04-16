@@ -23,7 +23,8 @@ class FollowsController extends Controller
         if(!$is_following) {
             //followする
             $follower->follow($user->id);
-            return redirect('/search');
+            // return redirect('/search');
+            return back();
         }
     }
 
@@ -38,7 +39,8 @@ class FollowsController extends Controller
         if($is_following) {
             //フォローを外す
             $follower->unfollow($user->id);
-            return redirect('/search');
+            // return redirect('/search');
+            return back();
         }
     }
 
