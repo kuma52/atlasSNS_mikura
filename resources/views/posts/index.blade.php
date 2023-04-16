@@ -14,7 +14,7 @@
 </div>
 
 @if ($errors->any())
-  <div class="">
+  <div class="error-text">
     <ul>
       @foreach ($errors->all() as $error)
       <li>{{ $error }}</li>
@@ -41,13 +41,15 @@
 <!-- 自分以外の投稿にはボタンを出さない = postsテーブルのuser_idとログインuserのidが一致したらボタンを出す -->
       @if($list->user_id == Auth::id())
         <div class="button-area">
-          <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open"><img class="btn" src="images/edit3.png" alt="編集"></a>
-            <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
-              <div class="trash-container">
-                <img src="images/trash-h3.png" class="trash-h" alt="削除">
-                <img class="btn" src="images/trash2.png" alt="削除">
-              </div>
-            </a>
+          <a href="" post="{{ $list->post }}" post_id="{{ $list->id }}" class="modal-open">
+            <img class="btn" src="images/edit3.png" alt="編集">
+          </a>
+          <a href="/post/{{ $list->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
+            <div class="trash-container">
+              <img src="images/trash-h3.png" class="trash-h" alt="削除">
+              <img class="btn" src="images/trash2.png" alt="削除">
+            </div>
+          </a>
         </div>
       @endif
 {!! Form::close() !!}
@@ -62,12 +64,12 @@
           <form action="post/update" method="post">
               <textarea name="post" class="modal-post"></textarea>
               <input type="hidden" name="post_id" class="modal-id" value="">
-              <input type="image" class="button" src="/images/edit.png" alt="更新">
+              <input type="image" class="button" src="/images/edit3.png" alt="更新">
               {{ csrf_field() }}
           </form>
 
           @if ($errors->any())
-          <div class="">
+          <div class="error-text">
             <ul>
               @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>

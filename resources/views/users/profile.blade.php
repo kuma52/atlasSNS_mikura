@@ -4,7 +4,7 @@
 
 <!-- エラーメッセージの表示 -->
 @if ($errors->any())
-  <div class="">
+  <div class="error-text">
     <ul>
       @foreach ($errors->all() as $error)
       <li>{{ $error }}</li>

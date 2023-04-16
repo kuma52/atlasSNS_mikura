@@ -16,9 +16,9 @@
 // });
 // Route::get('/home', 'HomeController@index')->name('home');
 
-//Auth::routes();
-//use App\Http\Controllers\UsersController;いったんコメントアウト
-//use App\Http\Controllers\FollowsController;いったんコメントアウト
+Auth::routes();
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FollowsController;
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login')->name('login');

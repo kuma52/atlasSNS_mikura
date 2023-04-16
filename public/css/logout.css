@@ -18,9 +18,6 @@ body {
     color: #fff;
     text-align: center;
     margin-top: 10%;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
 }
 
 a {
@@ -78,6 +75,11 @@ h2 {
 
 .back {
     font-size: 1.5em;
+}
+
+.error-text {
+    color: red;
+    line-height: 1.4em;
 }
 
 /* added */

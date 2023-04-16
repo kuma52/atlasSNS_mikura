@@ -2,9 +2,18 @@
 
 @section('content')
 
+
+
+
+
+<!-- フォーム -->
+{!! Form::open() !!}
+@csrf
+<h2>新規ユーザー登録</h2>
+
 <!-- エラーメッセージの表示 -->
 @if ($errors->any())
-  <div class="">
+  <div class="error-text">
     <ul>
       @foreach ($errors->all() as $error)
       <li>{{ $error }}</li>
@@ -18,10 +27,6 @@
 
 
 
-<!-- フォーム -->
-{!! Form::open() !!}
-@csrf
-<h2>新規ユーザー登録</h2>
 <div class="inner-element">
 {{ Form::label('ユーザー名') }}<br>
 {{ Form::text('username',null,['class' => 'input']) }}
