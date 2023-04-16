@@ -87,7 +87,7 @@ return [
         'string'  => 'The :attribute must be :size characters.',
         'array'   => 'The :attribute must contain :size items.',
     ],
-    'string'               => 'The :attribute must be a string.',
+    'string'               => ':attributeを入力してください',
     'timezone'             => 'The :attribute must be a valid zone.',
 //登録済みのメールかどうか
     'unique'               => 'この:attributeは登録済みです',//'The :attribute has already been taken.',
@@ -128,7 +128,7 @@ return [
         'username' => 'ユーザー名',
         'mail' => 'メールアドレス',
         'password' => 'パスワード',
-        '' => '',
+        'newpassword' => 'パスワード',
         '' => '',
         '' => '',
         '' => '',

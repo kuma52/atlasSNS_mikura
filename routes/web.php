@@ -76,5 +76,6 @@ Route::group(['middleware' => ['auth']], function() {//loginしていなけれ�
     //userPlofileページ
     Route::get('users/{id}/user-profile','UsersController@userProfile');
 
+    //logout
     Route::get('/logout', 'Auth\LoginController@logout');
 });

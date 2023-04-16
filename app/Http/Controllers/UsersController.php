@@ -41,6 +41,7 @@ class UsersController extends Controller
             $request->validate([
                 //'postしてきた値' => '検証ルール'
                 'mail' => 'required|string|email|min:5|max:40|unique:users,mail,'.$id.',id',//$idとusersテーブルのidカラムが一致するレコードはルール対象外とする
+                'newpassword' => 'required|string|min:8|max:20|confirmed',
                 'bio' => 'max:150',
             ]);
 
@@ -48,6 +49,7 @@ class UsersController extends Controller
             User::where('id', $id)->update([
                 //'カラム名' => 上で取得した$変数
                 'mail' => $mail,
+                'password' => bcrypt($password),//暗号
                 'bio' => $bio,
             ]);
 
@@ -63,21 +65,25 @@ class UsersController extends Controller
 
             //もしpasswordに値が入っていたら(nullでなければ)
             //→この条件を付けないと、パスワードがnullに更新されちゃった
-            if(isset($password)) {
-                $request->validate([
-                    'newpassword' => 'string|min:8|max:20|confirmed',
-                ]);
-                //更新する
-                User::where('id', $id)->update([
-                    'password' => bcrypt($password),//暗号化
-                ]);
-            }
+            // if(isset($password)) {
+            //     $request->validate([
+            //         'newpassword' => 'string|min:8|max:20|confirmed',
+            //     ]);
+            //     //更新する
+            //     User::where('id', $id)->update([
+            //         'password' => bcrypt($password),//暗号化
+            //     ]);
+            // }
+
+            // if(!isset($password)) {
+            //     $request->validate([
+            //         'newpassword' => 'required'
+            //     ]);
+            // else
+            // }
 
             //もしname="new_image"にファイルが入っていたら
             if($request->hasFile('new_image')){
-                // $request->validate([
-                //     'new_image' => 'nullable|mimes:jpg, png, bmp, gif, svg'
-                // ]);
                 //ファイル名を取得
                 $filename = $request->file('new_image')->getClientOriginalName();
                 //storeAsメソッドでファイルをpublicフォルダに格納
