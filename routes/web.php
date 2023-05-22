@@ -34,8 +34,6 @@ Route::post('/added', 'Auth\RegisterController@added');
 //ログイン中のページ
 Route::group(['middleware' => ['auth']], function() {//loginしていなければlogin画面に返すようにする
 
-//   //前ページ共通（login.blade）
-//     //フォロー・フォロワー数を渡す
     Route::get('/top','FollowsController@showFollows');
 
   //topページ
