@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;//以下追加した
+use App\Post; //以下追加した
 use App\User;
 use App\Follow;
 use Illuminate\Support\facades\Auth;
@@ -26,24 +26,26 @@ class PostsController extends Controller
         //postsテーブルから新着順で全てのレコードを取得する
         //$list = Post::latest()->get();
         //postsテーブルから新着順で、自分と自分がfollowしている人のレコードをすべて取得する
-        $list = Post::query()->whereIn('user_id', Auth::user()->following()->pluck('followed_id'))->orWhere('user_id',Auth::user()->id)->latest()->get();
+        $list = Post::query()->whereIn('user_id', Auth::user()->following()->pluck('followed_id'))->orWhere('user_id', Auth::user()->id)->latest()->get();
         //'表示したいファイル名'[受け渡したいデータ名]
         return view('posts.index', ['list' => $list]);
     }
 
-    public function followList(){
+    public function followList()
+    {
         return view('follows.followList');
     }
 
-    public function followerList(){
+    public function followerList()
+    {
         return view('follows.followerList');
     }
 
     //投稿機能
     public function create(Request $request)
     {
-        $post = $request->input('post');//formに入力されるtext
-        $user_id = Auth::id();//ログインしているuserのidを取得
+        $post = $request->input('post'); //formに入力されるtext
+        $user_id = Auth::id(); //ログインしているuserのidを取得
         //create前にバリデーションかける
         $request->validate([
             'post' => 'required|min:1|max:200',
